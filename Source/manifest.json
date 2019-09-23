@@ -1,10 +1,10 @@
 {
-	"manifest_version": 1,
+	"manifest_version": 2,
 
 	"name": "Hands Across the Web",
     "short_name": "HAW",
 	"description": "Replaces spaces with 👏, uppercases all text",
-	"author": "Max Parrish via Eric Bailey",
+	"author": "Max Parrish minorly editing Eric Bailey",
 	"version": "1.0",
 	"icons": {
 			"16": "icon16.png",

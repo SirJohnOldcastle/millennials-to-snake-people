@@ -25,9 +25,8 @@ function handleText(textNode) {
 
 function replaceText(v)
 {
-    // Fix some misspellings
     v = v.toUpperCase();
-    v = v.replace(" ","👏")
+    v = v.replace(/ /g,"👏")
     return v;
 }
 
