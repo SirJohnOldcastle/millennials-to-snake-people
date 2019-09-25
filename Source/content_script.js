@@ -8,7 +8,7 @@ function walk(rootNode)
     var walker = document.createTreeWalker(
         rootNode,
         NodeFilter.SHOW_TEXT,
-        null,
+        {"acceptNode": function(node){ return !isForbiddenNode(node)}},
         false
     ),
     node;
@@ -26,7 +26,10 @@ function handleText(textNode) {
 function replaceText(v)
 {
     v = v.toUpperCase();
-    v = v.replace(/ /g,"👏")
+    v = v.replace(/^(\w)/,"👏$1");
+    v = v.replace(/(\w)$/,"$1👏");
+    v = v.replace(/(\w) /g,"$1👏");
+    v = v.replace(/ (\w)/g,"👏$1");
     return v;
 }
 
@@ -34,8 +37,8 @@ function replaceText(v)
 function isForbiddenNode(node) {
     return node.isContentEditable || // DraftJS and many others
     (node.parentNode && node.parentNode.isContentEditable) || // Special case for Gmail
-    (node.tagName && (node.tagName.toLowerCase() == "textarea" || // Some catch-alls
-                     node.tagName.toLowerCase() == "input"));
+    (node.tagName && (node.tagName.toLowerCase() === "textarea" || // Some catch-alls
+                     node.tagName.toLowerCase() === "input")) || (node.parentElement && node.parentElement.tagName && (node.parentElement.tagName.toLowerCase() === "script" || node.parentElement.tagName.toLowerCase() === "style"));
 }
 
 // The callback used for the document body and title observers
