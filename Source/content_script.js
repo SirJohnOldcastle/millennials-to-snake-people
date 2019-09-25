@@ -28,8 +28,8 @@ function replaceText(v)
     v = v.toUpperCase();
     v = v.replace(/^(\w)/,"👏$1");
     v = v.replace(/(\w)$/,"$1👏");
-    v = v.replace(/(\w) /g,"$1👏");
-    v = v.replace(/ (\w)/g,"👏$1");
+    v = v.replace(/(\w)\s/g,"$1👏");
+    v = v.replace(/\s(\w)/g,"👏$1");
     return v;
 }
 
